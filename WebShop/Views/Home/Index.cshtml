@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "WEB SHOP";
+}
+
+<div class="jumbotron">
+    <h1>WEB SHOP</h1>
+    <p class="lead">Simple WebShop application using ASP.NET MVC.</p>
+    <p><a href="~/ShoppingCart/NewProduct" class="btn btn-primary btn-lg">Dodaj novi proizvod &raquo;</a></p>
+</div>
+
+<div class="row">
+    Raspolozivi proizvodi:
+    <table border="1">
+        <tr bgcolor="lightgrey">
+            <th>Naziv</th>
+            <th>Cena</th>
+            <th>Kolicina</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+
+        @foreach (Product p in ViewBag.products.collection.Values)
+        {
+        <tr>
+            <td>@p.name</td>
+            <td>@p.price</td>
+            <td>
+                <form method="post" action="~/ShoppingCart/Add">
+                    @Html.TextBox("count", 1, new { size = "3" })
+                    @Html.Hidden("id", p.id)
+                    <input type="submit" value="Posalji!" />
+                </form>
+            </td>
+            <td>
+                <form method="post" action="~/ShoppingCart/Rename">
+                    <input type="text" name="rename" />
+                    <input type="text" value="@p.id" name="id" hidden />
+                    <input type="submit" value="Rename!" />
+                </form>
+            </td>
+            <td>
+                <form method="get" action="~/ShoppingCart/Update">
+                    <input type="text" value="@p.id" name="id" hidden />
+                    <input type="submit" value="Update!" />
+                </form>
+            </td>
+            <td>
+                <form method="post" action="~/ShoppingCart/Delete">
+                    <input type="text" value="@p.id" name="id" hidden />
+                    <input type="submit" value="Delete!" />
+                </form>
+            </td>
+        </tr>
+        }
+    </table>
+    <hr />
+    <p>
+        <a href="/ShoppingCart">Pregled sadrzaja korpe</a>
+    </p>
+    <hr />
+
+</div>

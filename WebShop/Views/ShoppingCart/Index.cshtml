@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Korpa</h2>
+
+<table border="1">
+    <tr>
+        <th>Naziv</th>
+        <th>Jedinicna Cena</th>
+        <th>Komada</th>
+        <th>Ukupna Cena</th>
+    </tr>
+    @foreach (ShoppingCartItem sc in ViewBag.sc.items)
+    {
+        <tr>
+            <td>@sc.product.name</td>
+            <td>@sc.product.price</td>
+            <td>@sc.count</td>
+            <td>@sc.total</td>
+        </tr>
+    }
+</table>
+
+<hr />
+<p>
+    Ukupno: @ViewBag.sc.Total dinara.
+</p>
+<hr />
+
+
+<p>
+    <a href="~/Home">Povratak</a>
+</p>
